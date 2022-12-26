@@ -1,0 +1,39 @@
+
+body
+{
+	background:#2f4050;
+}
+
+.col-sm-9
+{
+	background-color:white;
+}
+#side_menu a
+{
+	color:#9fb1c2;
+}
+#side_menu .active a
+{
+	color:#ffffff;
+	background-color:#27AAE1;
+	font-weight:bold;
+}
+#side_menu a:hover
+{
+	color: red;
+	background-color: yellow;
+	font-weight: bold;
+	display: block;
+}
+.col-sm-3 h1
+{
+	color: white;
+}
+
+#footer{
+	padding: 10px;
+	border-top: 1 px solid black;
+	color: #eeeeee;
+	background-color: #211f22;
+	text-align: center;
+}

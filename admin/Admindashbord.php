@@ -1,0 +1,130 @@
+<?php
+include('../login/dAta.php');
+include ('Session.php');
+include ('Functions.php');
+$Admin=$_SESSION['adminskd'];
+if(!isset($_SESSION['adminskd']))
+        header("location:Login.php");
+?>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>admin panel</title>
+	<meta name="VIEWPORT" content="WIDTH=DEVICE-WIDTH, INITIAL-STATE=1" />
+	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
+	<script src="js/jquery.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/adminpanelcss.css">
+</head>
+<body>
+	<div style="height: 10px; background: #27aae1;"></div>
+<nav class="navbar navbar-inverse" role="navigation">
+<div class="container-fluid">
+<div class="navbar-header">
+<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapse">
+	<span class="sr-only">Toggle Navigation</span>
+	<span class="icon-bar"></span>
+	<span class="icon-bar"></span>
+	<span class="icon-bar"></span>
+</button>
+<a class="navbar-brand" href="Blog.php">
+	<h2 style="margin-top: -4px;">DREAM-MESS</h2>
+</a>	
+</div>
+<div class="collapse navbar-collapse" id="collapse">	
+<ul class="nav navbar-nav">
+	<li style="margin-top:5px;font-weight: bold;font-size: 1.2em;font-family:bitter,Georgia,Times New Roman,serif;">
+		<a href="../index.php">HOME</a></li>
+	<li style="margin-top: 5px;font-weight: bold;font-size: 1.2em;font-family:bitter,Georgia,Times New Roman,serif;">
+		<a href="../aboutus.html">ABOUT US</a></li>
+	<li style="margin-top: 5px;font-weight: bold;font-size: 1.2em;font-family:bitter,Georgia,Times New Roman,serif;">
+		<a href="../contact.php">CONTACT US</a></li>
+    
+	
+	<li style="margin-top: 5px;font-weight: bold;font-size: 1.2em;font-family:bitter,Georgia,Times New Roman,serif;">
+		<!--<a href="#">SERVICES</a></li>
+	<li style="margin-top: 5px;font-weight: bold;font-size: 1.2em;font-family:bitter,Georgia,Times New Roman,serif;">
+		<a href="#">FEATURE</a></li> -->
+</ul>
+
+</div>
+</div>		
+</nav>
+<div class="Line" style="height: 10px; background: #27aae1; margin-top: -20px;"></div>
+
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-3">
+				<h1 >Admin:<b style="color:#0AFF1A;"><?php echo $Admin ?></b></h1>
+				<ul id="side_menu" class="nav nav-pills nav-stacked">
+					<li class="active"><a href="#"><span class="glyphicon glyphicon-th">CONTACT US</span></a></li>
+					
+                    <li><a href="advetisercontact.php"><span class="glyphicon glyphicon-list-alt"> contact with advetiser</span></a></li>
+					<li><a href="Admins.php"><span class="glyphicon glyphicon-user"> Mannage_Admin</span></a></li>
+					<li><a href="../login/signout.php" ><span class="glyphicon glyphicon-log-out"> Logout</span></a></li>
+                    
+				</ul>
+			</div><!--end of side area---->
+			<div class="col-sm-9">
+				<div>
+				<?php 
+				echo Message();
+				echo SucessMessage();
+				?>
+				</div>
+				<h1>WANT TO CONTACT WITH US</h1>
+			<div class="table-responsive">
+				<table class="table table-striped table-hover">
+					<tr>
+						<th>Sr.No</th>
+						<th>Customer</th>
+						<th>EMAIL</th>
+						<th>PHONE NO</th>
+						<th>MESSAGE</th>
+                        <th>REPLY</th>
+					</tr>
+					<?php 
+						
+						$ViewQuery="SELECT * FROM contact";
+						$SrNo=0;
+						$Execute=mysqli_query($conn,$ViewQuery);
+						while ($DataRow=mysqli_fetch_array($Execute)) 
+						{
+							$name=$DataRow["cname"];
+                            $email=$DataRow["cemail"];
+                            $phone=$DataRow["cphno"];
+                            $msg=$DataRow["ctext"];
+							$SrNo++;
+					?>
+					<tr>
+					<td><?php echo $SrNo; ?></td>
+					<td style="color: darkblue;font-weight: bold;"><?php if (strlen($name)>15) 
+					{
+						$name=substr($name,0,15).'...';
+					}
+					echo $name; 
+					?></td>
+					<td style="color: darkblue;font-weight: bold;"><?php echo $email; ?></td>
+                        <td style="color: darkblue;font-weight: bold;"><?php echo $phone; ?></td>
+                        <td style="color: darkblue;font-weight: bold;">
+                            <?php 
+					echo $msg; 
+					?></td>
+                        <td>
+                        <a href="https://mail.google.com/mail/u/1/#inbox?compose=new">Reply</a>
+                        </td>
+					
+				</tr>
+			<?php } ?>
+				</table>
+			</div>	
+			</div><!-----end of main area----->
+		</div><!---end of row---->
+	</div><br><br><br><br><br><br><br>
+    <!---end of container----->
+	<div id="footer">
+		<hr><p>design By | <b>tanmoycsk99</b> | &copy;2019</p>
+	</div>
+<div style="height: 10px; background: #27aae1;"></div>
+</body>
+</html>
